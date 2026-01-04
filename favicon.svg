@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
+  <!-- Orange Scribble Blob Background -->
+  <path 
+    d="M48 5 C 25 8, 5 28, 8 55 C 10 82, 32 95, 55 92 C 82 88, 95 68, 92 40 C 88 15, 72 2, 48 5 Z" 
+    fill="#FF4D00" 
+  />
+  <!-- White Four-Point Sparkle -->
+  <path 
+    d="M50 20 L58 42 L80 50 L58 58 L50 80 L42 58 L20 50 L42 42 Z" 
+    fill="white" 
+  />
+</svg>
