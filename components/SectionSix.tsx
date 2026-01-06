@@ -10,76 +10,75 @@ import {
 
 const services = [
   {
-    id: 'brand',
-    title: 'brand',
+    id: 'creative',
+    title: 'generative creative',
     color: '#2E8B57', // Deep Green
     rotate: '-3deg',
     sticker: <div className="bg-[#1a5233] p-2 rounded-lg border-2 border-white transform rotate-[-10deg] shadow-lg"><CameraIcon className="w-12 h-12 md:w-14 md:h-14 text-white" /></div>,
     items: [
-      'Brand Strategy',
-      '360° Creative',
-      'Art Direction',
-      'Copywriting',
-      'Editing',
-      'Motion Graphics',
-      'DTP'
+      'Text-to-Image Generation',
+      'Infinite Ad Variations',
+      'Multilingual Copywriting',
+      'Smart Resizing (9:16, 4:5, 1:1)',
+      'Dynamic Template Library'
     ]
   },
   {
-    id: 'social',
-    title: 'social',
+    id: 'insights',
+    title: 'data insights',
     color: '#6495ED', // Cornflower Blue
     rotate: '2deg',
     sticker: <div className="bg-[#e0e7ff] p-1 rounded-full border-2 border-[#6495ED] transform rotate-[15deg] shadow-lg"><HandPhone className="w-14 h-14 md:w-16 md:h-16" /></div>,
     items: [
-      'Social Media Strategy',
-      'Social Media Creative',
-      'TikTok/Social Shoots',
-      'Influencer Campaigns',
-      'Scheduling Support',
-      'Community Management',
-      'Social Listening'
+      'Real-time Performance Metrics',
+      'Cross-Channel Analytics',
+      'Competitor Benchmarking',
+      'Creative Fatigue Alerts',
+      'Audience Persona Heatmaps'
     ]
   },
   {
-    id: 'activations',
-    title: 'activations',
+    id: 'optimization',
+    title: 'automated scaling',
     color: '#FF7F50', // Bright Orange
     rotate: '-2deg',
     sticker: <div className="transform rotate-[-5deg]"><SmileyFace className="w-20 h-20 md:w-24 md:h-24 drop-shadow-lg" /></div>,
     items: [
-      'Activation Strategy',
-      'Event Planning',
-      'Art Direction',
-      'Production'
+      'Budget Optimization (CBO)',
+      'Auto-Boost Winning Ads',
+      'A/B Testing at Scale',
+      'Smart Bid Management',
+      'Predictive ROAS Modeling'
     ]
   },
   {
-    id: 'video',
-    title: 'video production',
+    id: 'safety',
+    title: 'brand guard',
     color: '#A52A2A', // Deep Red/Maroon
     rotate: '3deg',
     sticker: <div className="transform rotate-[10deg]"><WatchSticker className="w-20 h-20 md:w-24 md:h-24 drop-shadow-lg" /></div>,
     items: [
-      'Campaign video',
-      'Branded content',
-      'Social content',
-      'Marketing material'
+      'Visual Style Enforcement',
+      'Tone of Voice AI',
+      'Automated Approval Workflows',
+      'Asset Library Management',
+      'Compliance Checks'
     ]
   },
   {
-    id: 'partners',
-    title: 'with partners',
-    titleBreak: true,
+    id: 'integrations',
+    title: 'integrations',
+    titleBreak: false,
     color: '#E6E6FA', // Light Lavender
     textColor: 'black', // Special case for light bg
     rotate: '-3deg',
     sticker: <div className="transform rotate-[-15deg]"><HeartSparkleSticker className="w-20 h-20 md:w-24 md:h-24 drop-shadow-lg" /></div>,
     items: [
-      'PR/Journalism',
-      '3D / VFX',
-      'Food styling',
-      'Photography'
+      'Meta Ads Manager',
+      'TikTok for Business',
+      'Shopify & Magento',
+      'Google Analytics 4',
+      'Slack & Microsoft Teams'
     ]
   }
 ];
@@ -94,14 +93,14 @@ const SectionSix = () => {
       <div className="text-center mb-10 z-20">
         <h2 className="flex flex-col md:flex-row items-center justify-center gap-x-3 text-4xl md:text-6xl">
           <span className="font-sans font-black text-black tracking-tight">
-            call us if you
+            the all-in-one
           </span>
           <div className="relative inline-block mt-1 md:mt-0">
-             <span className="relative z-10 font-serif italic font-bold text-black tracking-tighter">
-              need:
+             <span className="relative z-10 font-serif italic font-bold text-[#FF4D00] tracking-tighter">
+              growth engine:
             </span>
             {/* Hand-drawn underline */}
-            <svg className="absolute -bottom-2 left-0 w-full h-4 text-black pointer-events-none" viewBox="0 0 100 20" preserveAspectRatio="none">
+            <svg className="absolute -bottom-2 left-0 w-full h-4 text-[#FF4D00] pointer-events-none" viewBox="0 0 100 20" preserveAspectRatio="none">
               <path d="M5 15 Q 50 20, 95 5" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
             </svg>
           </div>
@@ -162,7 +161,7 @@ const SectionSix = () => {
                 <div className="mt-8 mb-4">
                     <h3 className={`font-sans font-black text-2xl md:text-3xl leading-tight ${service.textColor === 'black' ? 'text-black' : 'text-white'}`}>
                         {service.titleBreak ? (
-                            <>with<br/>partners</>
+                            service.title
                         ) : (
                             service.title
                         )}

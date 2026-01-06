@@ -22,7 +22,7 @@ const SectionThree = () => {
         {/* Part 2: Serif Block with Decorations */}
         {/* "from TV to TikTok." */}
         <div className="relative mt-2 md:mt-8">
-            <span className="font-serif italic text-[11vw] md:text-[7.5rem] lg:text-[9rem] text-black tracking-[-0.02em] relative z-10 leading-[1.1]">
+            <span className="font-serif italic text-[11vw] md:text-[7.5rem] lg:text-[9rem] text-[#FF4D00] tracking-[-0.02em] relative z-10 leading-[1.1]">
                 we make brands.
             </span>
 

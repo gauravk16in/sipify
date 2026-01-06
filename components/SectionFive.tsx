@@ -1,160 +1,132 @@
-import React from 'react';
-import { motion } from 'framer-motion';
-import { GoodVibesSticker, FistBumpSticker, GreenAbstractFlower } from './Stickers';
+import React, { useRef } from 'react';
+import { motion, useScroll, useTransform } from 'framer-motion';
+import { GlovedHandCursor, HundredSticker } from './Stickers';
+import { Share2, TrendingUp, Link } from 'lucide-react';
 
 const SectionFive = () => {
+  const containerRef = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress } = useScroll({
+    target: containerRef,
+    offset: ["start start", "end end"]
+  });
+
+  // --- Animation Phases ---
+  
+  // Phase 1: Text "Sync your assets"
+  // Extended exit slightly to bridge gap to card reveal
+  const text1Opacity = useTransform(scrollYProgress, [0, 0.3, 0.45], [1, 1, 0]);
+  const text1Y = useTransform(scrollYProgress, [0.3, 0.45], ["0%", "-50%"]);
+  const text1Scale = useTransform(scrollYProgress, [0.3, 0.45], [1, 0.9]);
+
+  // Phase 2: Removed (was "dominate the feed")
+
+  // Phase 3: Ad Card Reveal
+  // Starts slightly earlier now to follow "Sync your assets"
+  const cardScale = useTransform(scrollYProgress, [0.4, 0.55], [0, 1]);
+  const cardRotate = useTransform(scrollYProgress, [0.4, 0.55], [-10, 0]);
+  
+  // Phase 4: Interaction
+  const handX = useTransform(scrollYProgress, [0.55, 0.65], ["100%", "0%"]);
+  const handY = useTransform(scrollYProgress, [0.55, 0.65], ["100%", "0%"]);
+  const handScale = useTransform(scrollYProgress, [0.65, 0.7, 0.75], [1, 0.9, 1]); 
+
   return (
-    <div className="relative w-full min-h-[150vh] bg-black flex flex-col items-center pt-24 md:pt-40 overflow-hidden">
+    <section ref={containerRef} className="relative h-[250vh] bg-[#F3F2ED]">
       
-      {/* Background Element: Green Abstract Flower */}
-      <div className="absolute top-[40%] right-[10%] w-[500px] h-[500px] md:w-[800px] md:h-[800px] z-0 opacity-80 pointer-events-none">
-        <GreenAbstractFlower className="w-full h-full rotate-12" />
-      </div>
-
-      {/* --- Part 1: Typography Block --- */}
-      <div className="relative z-10 w-full max-w-7xl mx-auto px-6 text-center">
+      <div className="sticky top-0 h-screen w-full flex items-center justify-center overflow-hidden">
         
-        {/* "we are a" + "young" (circled) + ", future-proof" */}
-        <div className="flex flex-wrap justify-center items-end gap-x-3 md:gap-x-5 leading-[0.9] mb-2 md:mb-6">
-          <span className="font-sans font-black text-white text-[9vw] md:text-[6rem] lg:text-[7.5rem] tracking-tight">
-            we are a
-          </span>
-          
-          <div className="relative">
-             <span className="relative z-10 font-serif italic text-white text-[9vw] md:text-[6rem] lg:text-[7.5rem] tracking-tight">
-              young
-            </span>
-            {/* Draw-on-scroll Circle */}
-            <svg className="absolute -top-[20%] -left-[20%] w-[140%] h-[140%] z-0 pointer-events-none" viewBox="0 0 200 100" preserveAspectRatio="none">
-              <motion.path 
-                d="M20,50 C20,20 90,5 150,20 C190,30 190,70 150,85 C100,95 20,80 20,50" 
-                fill="none" 
-                stroke="white" 
-                strokeWidth="3"
-                initial={{ pathLength: 0 }}
-                whileInView={{ pathLength: 1 }}
-                viewport={{ once: true, margin: "-100px" }}
-                transition={{ duration: 1.5, ease: "easeInOut" }}
-              />
-            </svg>
-          </div>
+        {/* --- Phase 1 Text --- */}
+        <motion.div 
+            style={{ opacity: text1Opacity, y: text1Y, scale: text1Scale }}
+            className="absolute z-20 text-center px-4"
+        >
+            <div className="inline-flex items-center gap-2 mb-4 bg-white/50 backdrop-blur-sm px-4 py-2 rounded-full border border-gray-300">
+                <Link className="w-5 h-5 text-gray-500" />
+                <span className="font-mono text-gray-500 text-sm">https://your-brand.com</span>
+            </div>
+            <h2 className="font-sans font-black text-5xl md:text-7xl lg:text-8xl tracking-tight text-black leading-tight">
+                sync your
+                <br/>
+                <span className="font-serif italic text-[#4D79FF] tracking-tighter">assets</span>
+            </h2>
+        </motion.div>
 
-          <span className="font-sans font-black text-white text-[9vw] md:text-[6rem] lg:text-[7.5rem] tracking-tight">
-            , future-proof
-          </span>
-        </div>
+        {/* --- Phase 3: The Generated Ad Card --- */}
+        <motion.div 
+            style={{ scale: cardScale, rotate: cardRotate }}
+            className="absolute z-30 top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
+        >
+            <div className="relative w-[320px] md:w-[380px] bg-black rounded-[2rem] overflow-hidden shadow-2xl border border-gray-800">
+                
+                {/* Header (Simulate Instagram/Social UI) */}
+                <div className="p-4 flex items-center gap-3 border-b border-white/10 bg-white/5 backdrop-blur-md absolute top-0 w-full z-20">
+                    <div className="w-8 h-8 rounded-full bg-gradient-to-tr from-yellow-400 to-red-500 p-[2px]">
+                        <div className="w-full h-full rounded-full bg-black border-2 border-black overflow-hidden">
+                             <img src="https://images.unsplash.com/photo-1599305445671-ac291c95aaa9?q=80&w=200" className="w-full h-full object-cover" />
+                        </div>
+                    </div>
+                    <div className="flex-1">
+                        <p className="text-white text-xs font-bold">YourBrand_Official</p>
+                        <p className="text-gray-400 text-[10px]">Sponsored • AI Generated</p>
+                    </div>
+                    <div className="px-3 py-1 bg-[#39FF14] rounded text-black text-[10px] font-bold uppercase tracking-wide">
+                        Active
+                    </div>
+                </div>
 
-        {/* "team of 49 digitally native" */}
-        <div className="flex flex-wrap justify-center items-center gap-x-4 mb-2 md:mb-6">
-          <span className="font-sans font-black text-white text-[9vw] md:text-[6rem] lg:text-[7.5rem] tracking-tight leading-[0.9]">
-            team of 49 digitally native
-          </span>
-        </div>
+                {/* Ad Content */}
+                <div className="relative w-full aspect-[4/5] bg-gray-900">
+                    <img 
+                        src="https://images.unsplash.com/photo-1515378960530-7c0da6231fb1?q=80&w=600" 
+                        alt="Generated Ad" 
+                        className="w-full h-full object-cover opacity-90"
+                    />
+                    
+                    {/* Sticker overlay indicating success */}
+                    <div className="absolute bottom-6 right-6 transform rotate-12">
+                        <HundredSticker className="w-24 h-16" />
+                    </div>
+                </div>
 
-        {/* "wunderkinder" (underlined) + ". not to brag!" */}
-        <div className="flex flex-wrap justify-center items-baseline gap-x-3 md:gap-x-5 leading-[0.9]">
-           <div className="relative">
-             <span className="font-serif italic text-white text-[9vw] md:text-[6rem] lg:text-[7.5rem] tracking-tight">
-              wunderkinder.
-            </span>
-            {/* Draw-on-scroll Underline */}
-            <svg className="absolute -bottom-2 left-0 w-full h-8 z-20 pointer-events-none" viewBox="0 0 300 30" preserveAspectRatio="none">
-               <motion.path 
-                d="M5 15 Q 150 25, 290 5" 
-                fill="none" 
-                stroke="white" 
-                strokeWidth="4"
-                strokeLinecap="round"
-                initial={{ pathLength: 0 }}
-                whileInView={{ pathLength: 1 }}
-                viewport={{ once: true, margin: "-50px" }}
-                transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
-              />
-            </svg>
-          </div>
-          
-          <span className="font-sans font-black text-white text-[9vw] md:text-[6rem] lg:text-[7.5rem] tracking-tight">
-            not to brag!
-          </span>
-        </div>
+                {/* Footer / CTA Area */}
+                <div className="bg-[#1a1a1a] p-4 border-t border-white/10">
+                    <div className="flex justify-between items-center mb-3">
+                        <p className="text-white font-sans font-bold text-sm">Shop the future collection.</p>
+                        <div className="bg-[#4D79FF] px-4 py-2 rounded-lg text-white text-xs font-bold">
+                            Shop Now
+                        </div>
+                    </div>
+                    
+                    {/* Performance Metrics Bar */}
+                    <div className="flex items-center gap-4 pt-3 border-t border-white/5">
+                        <div className="flex items-center gap-1">
+                            <TrendingUp className="w-4 h-4 text-[#39FF14]" />
+                            <span className="text-[#39FF14] text-xs font-bold">ROAS 4.5x</span>
+                        </div>
+                        <div className="flex items-center gap-1">
+                            <span className="text-gray-400 text-xs">CTR 2.1%</span>
+                        </div>
+                        <div className="flex items-center gap-1 ml-auto">
+                            <Share2 className="w-4 h-4 text-gray-500" />
+                        </div>
+                    </div>
+                </div>
+
+                {/* --- Hand Cursor Interaction --- */}
+                <motion.div 
+                    style={{ x: handX, y: handY, scale: handScale }}
+                    className="absolute top-[60%] right-[30%] w-24 h-24 pointer-events-none z-50 origin-bottom-left"
+                >
+                    <GlovedHandCursor />
+                </motion.div>
+
+            </div>
+        </motion.div>
 
       </div>
 
-
-      {/* --- Part 2: Image Grid with Connecting Arrow --- */}
-      <div className="relative w-full max-w-7xl mx-auto h-[800px] mt-20 md:mt-32">
-        
-        {/* Draw-on-scroll Connector Arrow */}
-        <svg className="absolute inset-0 w-full h-full pointer-events-none z-20" viewBox="0 0 1000 800" preserveAspectRatio="none">
-           <motion.path 
-            d="M 250 350 C 300 500, 500 500, 500 700 C 500 800, 800 600, 850 450" 
-            fill="none" 
-            stroke="white" 
-            strokeWidth="2"
-            strokeDasharray="10 10"
-            initial={{ pathLength: 0 }}
-            whileInView={{ pathLength: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 2, ease: "easeInOut" }}
-           />
-           {/* Arrowhead */}
-           <motion.path 
-             d="M 840 460 L 850 450 L 830 440"
-             fill="none"
-             stroke="white"
-             strokeWidth="2"
-             initial={{ opacity: 0 }}
-             whileInView={{ opacity: 1 }}
-             viewport={{ once: true }}
-             transition={{ delay: 1.9, duration: 0.2 }}
-           />
-        </svg>
-
-
-        {/* Image 1: Top Left/Center - Bald Man */}
-        <div className="absolute top-0 left-[5%] md:left-[15%] w-[250px] h-[350px] md:w-[320px] md:h-[420px] z-10">
-            <div className="w-full h-full rounded-[30px] overflow-hidden border-4 border-transparent hover:border-white transition-all duration-300 transform -rotate-3">
-                <img 
-                    src="https://images.unsplash.com/photo-1599566150163-29194dcaad36?q=80&w=1887&auto=format&fit=crop" 
-                    alt="Team Member" 
-                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
-                />
-            </div>
-            {/* Sticker */}
-            <GoodVibesSticker className="absolute -bottom-10 -right-10 w-32 h-24 rotate-12 z-20" />
-        </div>
-
-        {/* Image 2: Bottom Center - Curly Hair (Cropped) */}
-        <div className="absolute bottom-0 left-[30%] md:left-[40%] w-[200px] h-[250px] md:w-[280px] md:h-[350px] z-10 translate-y-10">
-             <div className="w-full h-full rounded-t-[100px] rounded-b-[20px] overflow-hidden border-2 border-white/20 transform rotate-2">
-                <img 
-                    src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=1887&auto=format&fit=crop" 
-                    alt="Team Member" 
-                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
-                />
-            </div>
-             {/* Name Tag (Simulated) */}
-             <div className="absolute bottom-4 left-1/2 -translate-x-1/2 bg-white px-3 py-1 rounded-full">
-                <span className="font-script text-black text-sm font-bold">truus</span>
-             </div>
-        </div>
-
-        {/* Image 3: Right Side - Woman */}
-        <div className="absolute top-[20%] right-[5%] md:right-[10%] w-[250px] h-[350px] md:w-[320px] md:h-[420px] z-10">
-            <div className="w-full h-full rounded-[40px] overflow-hidden border-4 border-transparent hover:border-white transition-all duration-300 transform rotate-6">
-                 <img 
-                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1887&auto=format&fit=crop" 
-                    alt="Team Member" 
-                    className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500"
-                />
-            </div>
-             {/* Sticker */}
-            <FistBumpSticker className="absolute top-1/2 -right-12 w-28 h-28 -rotate-12 z-20" />
-        </div>
-
-      </div>
-
-    </div>
+    </section>
   );
 };
 

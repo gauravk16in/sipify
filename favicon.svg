@@ -1,12 +1,22 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100">
-  <!-- Orange Scribble Blob Background -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Hard Shadow -->
+  <rect x="60" y="60" width="410" height="410" rx="80" fill="black" />
+  <!-- Main Container -->
+  <rect x="40" y="40" width="410" height="410" rx="80" fill="#FF4D00" stroke="black" stroke-width="20" />
+  <!-- The 'S' Logo -->
   <path 
-    d="M48 5 C 25 8, 5 28, 8 55 C 10 82, 32 95, 55 92 C 82 88, 95 68, 92 40 C 88 15, 72 2, 48 5 Z" 
-    fill="#FF4D00" 
+    d="M330 160 C 330 110, 180 110, 180 190 C 180 270, 330 270, 330 350 C 330 430, 160 430, 160 380" 
+    fill="none" 
+    stroke="black" 
+    stroke-width="70" 
+    stroke-linecap="round" 
+    stroke-linejoin="round"
   />
-  <!-- White Four-Point Sparkle -->
+  <!-- Sparkle Accent -->
   <path 
-    d="M50 20 L58 42 L80 50 L58 58 L50 80 L42 58 L20 50 L42 42 Z" 
+    d="M360 100 L 375 130 L 405 145 L 375 160 L 360 190 L 345 160 L 315 145 L 345 130 Z" 
     fill="white" 
+    stroke="black" 
+    stroke-width="8"
   />
 </svg>

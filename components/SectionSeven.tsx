@@ -2,57 +2,15 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { BlueBlob, FingerHeartSticker, ConnectorArrow } from './Stickers';
 
-// --- Placeholder Logos (SVG Components) ---
-// Using simple text/shapes to simulate logos as requested
-const LogoGetir = () => (
-    <svg viewBox="0 0 100 40" className="w-24 h-auto fill-white">
-        <text x="50" y="25" textAnchor="middle" fontFamily="sans-serif" fontWeight="900" fontSize="24">getir</text>
-    </svg>
-);
-const LogoAceTate = () => (
-    <svg viewBox="0 0 100 60" className="w-24 h-auto fill-white">
-         <text x="50" y="25" textAnchor="middle" fontFamily="sans-serif" fontWeight="bold" fontSize="18">ace &</text>
-         <text x="50" y="45" textAnchor="middle" fontFamily="sans-serif" fontWeight="bold" fontSize="18">tate</text>
-    </svg>
-);
-const LogoOxxio = () => (
-    <svg viewBox="0 0 120 40" className="w-28 h-auto fill-none stroke-white stroke-[3]">
-        <text x="60" y="30" textAnchor="middle" fontFamily="sans-serif" fontWeight="900" fontSize="30" fill="none" stroke="white" strokeWidth="2">OXXIO</text>
-    </svg>
-);
-const LogoKFC = () => (
-    <div className="flex flex-col items-center">
-        <div className="w-12 h-12 bg-white rounded-full mb-1 flex items-center justify-center">
-             <span className="text-black font-black">KFC</span>
-        </div>
-    </div>
-);
-const LogoNetflix = () => (
-    <svg viewBox="0 0 100 30" className="w-28 h-auto fill-white">
-        <text x="50" y="22" textAnchor="middle" fontFamily="sans-serif" fontWeight="900" fontSize="24" letterSpacing="1">NETFLIX</text>
-    </svg>
-);
-const LogoANWB = () => (
-    <svg viewBox="0 0 100 50" className="w-24 h-auto">
-        <ellipse cx="50" cy="25" rx="40" ry="20" fill="none" stroke="white" strokeWidth="3" />
-        <text x="50" y="30" textAnchor="middle" fontFamily="sans-serif" fontWeight="900" fontSize="18" fill="white">anwb</text>
-    </svg>
-);
-
 const partners = [
-  { id: 1, color: '#2D7A65', logo: <LogoGetir /> }, // Deep Green
-  { id: 2, color: '#D9F99D', logo: <LogoAceTate />, textDark: true }, // Lime (Dark Text for contrast)
-  { id: 3, color: '#903250', logo: <LogoOxxio /> }, // Burgundy
-  { id: 4, color: '#E0Aaff', logo: <LogoKFC /> }, // Purple
-  { id: 5, color: '#4D79FF', logo: <LogoNetflix /> }, // Bright Blue
-  { id: 6, color: '#9F3E50', logo: <LogoANWB /> }, // Reddish
-  // Duplicates for seamless loop
-  { id: 11, color: '#2D7A65', logo: <LogoGetir /> },
-  { id: 12, color: '#D9F99D', logo: <LogoAceTate />, textDark: true },
-  { id: 13, color: '#903250', logo: <LogoOxxio /> },
-  { id: 14, color: '#E0Aaff', logo: <LogoKFC /> },
-  { id: 15, color: '#4D79FF', logo: <LogoNetflix /> },
-  { id: 16, color: '#9F3E50', logo: <LogoANWB /> },
+  { id: 1, color: '#0668E1', domain: 'meta.com', name: 'Meta', textDark: false }, // Meta Blue
+  { id: 2, color: '#FFFFFF', domain: 'beminimalist.co', name: 'Minimalist', textDark: true }, // White
+  { id: 3, color: '#000000', domain: 'nike.com', name: 'Nike', textDark: false }, // Black
+  { id: 4, color: '#FC8019', domain: 'swiggy.com', name: 'Swiggy', textDark: false }, // Swiggy Orange
+  { id: 5, color: '#E4002B', domain: 'kwalitywalls.in', name: 'Kwality Walls', textDark: false }, // Kwality Red
+  { id: 6, color: '#F5F5F5', domain: 'amul.com', name: 'Amul', textDark: true }, // Amul Light
+  { id: 7, color: '#CB202D', domain: 'zomato.com', name: 'Zomato', textDark: false }, // Zomato Red
+  { id: 8, color: '#FFD700', domain: 'lego.com', name: 'Lego', textDark: true }, // Lego Yellow (pop)
 ];
 
 const SectionSeven = () => {
@@ -76,12 +34,12 @@ const SectionSeven = () => {
             </h2>
             
             <div className="relative mt-2">
-                 <span className="font-serif italic font-bold text-black text-5xl md:text-7xl lg:text-8xl relative z-10">
+                 <span className="font-serif italic font-bold text-[#FF4D00] text-5xl md:text-7xl lg:text-8xl relative z-10">
                     with:
                 </span>
                 {/* Hand-drawn underline */}
                 <svg className="absolute -bottom-2 left-0 w-full h-6 pointer-events-none" viewBox="0 0 100 20" preserveAspectRatio="none">
-                    <path d="M5 10 Q 50 18, 95 5" fill="none" stroke="black" strokeWidth="4" strokeLinecap="round" />
+                    <path d="M5 10 Q 50 18, 95 5" fill="none" stroke="#FF4D00" strokeWidth="4" strokeLinecap="round" />
                 </svg>
             </div>
 
@@ -110,24 +68,27 @@ const SectionSeven = () => {
         <div className="w-1/2 max-w-[240px] h-full overflow-hidden">
             <motion.div 
                 className="flex flex-col gap-6"
-                animate={{ y: [0, -1200] }} // Adjust based on height of items
+                animate={{ y: [0, -1600] }} // Increased distance for more items
                 transition={{ 
                     repeat: Infinity, 
                     ease: "linear", 
-                    duration: 20 // Slow continuous speed
+                    duration: 30 // Slower speed
                 }}
             >
-                {/* Render items twice ensures loop */}
-                {[...partners, ...partners].map((partner, i) => (
+                {/* Triple render for seamless loop */}
+                {[...partners, ...partners, ...partners].map((partner, i) => (
                     <div 
                         key={`col1-${i}`} 
-                        className="w-full aspect-square rounded-[24px] flex items-center justify-center shadow-lg relative group overflow-hidden"
+                        className="w-full aspect-square rounded-[24px] flex items-center justify-center shadow-lg relative group overflow-hidden p-8"
                         style={{ backgroundColor: partner.color }}
                     >
-                         {/* Logo */}
-                         <div className={`transform transition-transform duration-300 group-hover:scale-110 ${partner.textDark ? 'text-black fill-black' : 'text-white fill-white'}`}>
-                            {partner.logo}
-                         </div>
+                         {/* Logo from Brandfetch */}
+                         <img 
+                            src={`https://cdn.brandfetch.io/${partner.domain}/w/400`}
+                            alt={`${partner.name} logo`}
+                            className={`w-full h-full object-contain transform transition-transform duration-300 group-hover:scale-110 select-none pointer-events-none`}
+                            // Removed filter to show original brand colors and avoid issues with non-transparent images
+                         />
                     </div>
                 ))}
             </motion.div>
@@ -137,22 +98,25 @@ const SectionSeven = () => {
         <div className="w-1/2 max-w-[240px] h-full overflow-hidden pt-12"> {/* Offset starting position */}
             <motion.div 
                  className="flex flex-col gap-6"
-                 animate={{ y: [-1200, 0] }} // Reverse direction
+                 animate={{ y: [-1600, 0] }} // Reverse direction
                  transition={{ 
                      repeat: Infinity, 
                      ease: "linear", 
-                     duration: 25 // Slightly different speed for dynamic feel
+                     duration: 35 // Different speed
                  }}
             >
-                 {[...partners, ...partners].reverse().map((partner, i) => (
+                 {[...partners, ...partners, ...partners].reverse().map((partner, i) => (
                      <div 
                         key={`col2-${i}`} 
-                        className="w-full aspect-square rounded-[24px] flex items-center justify-center shadow-lg relative group overflow-hidden"
+                        className="w-full aspect-square rounded-[24px] flex items-center justify-center shadow-lg relative group overflow-hidden p-8"
                         style={{ backgroundColor: partner.color }}
                     >
-                         <div className={`transform transition-transform duration-300 group-hover:scale-110 ${partner.textDark ? 'text-black fill-black' : 'text-white fill-white'}`}>
-                            {partner.logo}
-                         </div>
+                         <img 
+                            src={`https://cdn.brandfetch.io/${partner.domain}/w/400`}
+                            alt={`${partner.name} logo`}
+                            className={`w-full h-full object-contain transform transition-transform duration-300 group-hover:scale-110 select-none pointer-events-none`}
+                            // Removed filter
+                         />
                     </div>
                 ))}
             </motion.div>

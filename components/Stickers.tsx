@@ -424,6 +424,31 @@ export const ConnectorArrow = ({ className }: { className?: string }) => (
   </svg>
 );
 
+export const GlovedHandCursor = ({ className }: { className?: string }) => (
+  <svg viewBox="0 0 100 100" className={className} xmlns="http://www.w3.org/2000/svg">
+    <g transform="rotate(-15, 50, 50)">
+        {/* Glove Body */}
+        <path 
+            d="M30 60 C 25 50, 30 35, 40 30 C 40 20, 50 15, 60 20 C 65 15, 75 15, 80 25 C 85 35, 80 50, 70 60 L 70 80 C 75 85, 75 95, 65 95 L 35 95 C 25 95, 25 85, 30 80 Z" 
+            fill="white" 
+            stroke="black" 
+            strokeWidth="3" 
+            strokeLinejoin="round"
+        />
+        {/* Fingers details */}
+        <path d="M40 30 L 40 50" stroke="black" strokeWidth="2" />
+        <path d="M50 20 L 50 50" stroke="black" strokeWidth="2" />
+        <path d="M60 20 L 60 50" stroke="black" strokeWidth="2" />
+        {/* Wrist cuff */}
+        <rect x="25" y="80" width="50" height="15" rx="5" fill="white" stroke="black" strokeWidth="3" />
+        {/* Motion lines above fingers (for tap effect) */}
+        <path d="M40 10 L 40 5" stroke="black" strokeWidth="2" />
+        <path d="M50 5 L 50 0" stroke="black" strokeWidth="2" />
+        <path d="M60 10 L 60 5" stroke="black" strokeWidth="2" />
+    </g>
+  </svg>
+);
+
 // --- NEW FOOTER STICKERS ---
 
 export const BamSticker = ({ className }: { className?: string }) => (
