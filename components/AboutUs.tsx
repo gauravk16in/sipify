@@ -11,10 +11,6 @@ import {
   UnderlineLine 
 } from './Stickers';
 
-interface AboutUsProps {
-  onNavigate: (page: 'home' | 'privacy' | 'terms' | 'refund') => void;
-}
-
 const teamMembers = [
   {
     name: "Sarah Jenkins",
@@ -57,7 +53,7 @@ const values = [
   }
 ];
 
-const AboutUs = ({ onNavigate }: AboutUsProps) => {
+const AboutUs = () => {
   return (
     <div className="w-full min-h-screen bg-[#F3F2ED] pt-24 md:pt-32">
       
@@ -191,7 +187,7 @@ const AboutUs = ({ onNavigate }: AboutUsProps) => {
       </section>
 
       {/* --- Footer --- */}
-      <SectionFooter onNavigate={onNavigate} />
+      <SectionFooter />
     </div>
   );
 };

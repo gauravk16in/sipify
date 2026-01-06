@@ -1,5 +1,6 @@
 
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { BrowserRouter, Routes, Route, useNavigate, useLocation } from 'react-router-dom';
 import Header from './components/Header';
 import Hero from './components/Hero';
 import SectionTwo from './components/SectionTwo';
@@ -16,51 +17,85 @@ import Solution from './components/Solution';
 
 type Page = 'home' | 'privacy' | 'terms' | 'refund' | 'about' | 'pricing' | 'product' | 'solution';
 
-function App() {
-  const [currentPage, setCurrentPage] = useState<Page>('home');
-
-  // Scroll to top when page changes
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
+  
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, [currentPage]);
+  }, [pathname]);
+  
+  return null;
+};
 
-  const renderContent = () => {
-    switch (currentPage) {
-      case 'privacy':
-        return <PrivacyPolicy onBack={() => setCurrentPage('home')} />;
-      case 'terms':
-        return <TermsConditions onBack={() => setCurrentPage('home')} />;
-      case 'refund':
-        return <RefundPolicy onBack={() => setCurrentPage('home')} />;
-      case 'about':
-        return <AboutUs onNavigate={setCurrentPage} />;
-      case 'pricing':
-        return <Pricing onNavigate={setCurrentPage} />;
-      case 'product':
-        return <Product onNavigate={setCurrentPage} />;
-      case 'solution':
-        return <Solution onNavigate={setCurrentPage} />;
-      default:
-        return (
-          <>
-            <Hero />
-            <SectionTwo />
-            <SectionThree />
-            <SectionXRay />
-            <SectionSix />
-            <SectionSeven />
-            <SectionFooter onNavigate={setCurrentPage} />
-          </>
-        );
-    }
+const HomePage = () => {
+  const navigate = useNavigate();
+  const handleNavigate = (page: Page) => {
+    const routes: Record<Page, string> = {
+      home: '/',
+      privacy: '/privacy-policy',
+      terms: '/terms-conditions',
+      refund: '/refund-policy',
+      about: '/company',
+      pricing: '/pricing',
+      product: '/products',
+      solution: '/solutions'
+    };
+    navigate(routes[page]);
+  };
+
+  return (
+    <>
+      <Hero />
+      <SectionTwo />
+      <SectionThree />
+      <SectionXRay />
+      <SectionSix />
+      <SectionSeven />
+      <SectionFooter onNavigate={handleNavigate} />
+    </>
+  );
+};
+
+const AppContent = () => {
+  const navigate = useNavigate();
+  
+  const handleNavigate = (page: Page) => {
+    const routes: Record<Page, string> = {
+      home: '/',
+      privacy: '/privacy-policy',
+      terms: '/terms-conditions',
+      refund: '/refund-policy',
+      about: '/company',
+      pricing: '/pricing',
+      product: '/products',
+      solution: '/solutions'
+    };
+    navigate(routes[page]);
   };
 
   return (
     <main className="w-full min-h-screen bg-[#F3F2ED]">
-      {/* Header stays visible on all pages, passing navigation prop */}
-      <Header onNavigate={setCurrentPage} />
-      {renderContent()}
+      <ScrollToTop />
+      <Header onNavigate={handleNavigate} />
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/privacy-policy" element={<PrivacyPolicy onBack={() => navigate('/')} />} />
+        <Route path="/terms-conditions" element={<TermsConditions onBack={() => navigate('/')} />} />
+        <Route path="/refund-policy" element={<RefundPolicy onBack={() => navigate('/')} />} />
+        <Route path="/company" element={<AboutUs onNavigate={handleNavigate} />} />
+        <Route path="/pricing" element={<Pricing onNavigate={handleNavigate} />} />
+        <Route path="/products" element={<Product onNavigate={handleNavigate} />} />
+        <Route path="/solutions" element={<Solution onNavigate={handleNavigate} />} />
+      </Routes>
     </main>
+  );
+};
+
+function App() {
+  return (
+    <BrowserRouter>
+      <AppContent />
+    </BrowserRouter>
   );
 }
 

@@ -11,10 +11,6 @@ import {
   LimeBurst
 } from './Stickers';
 
-interface PricingProps {
-  onNavigate: (page: 'home' | 'privacy' | 'terms' | 'refund' | 'about' | 'pricing') => void;
-}
-
 const faqs = [
   {
     q: "Do unused credits roll over?",
@@ -34,7 +30,7 @@ const faqs = [
   }
 ];
 
-const Pricing = ({ onNavigate }: PricingProps) => {
+const Pricing = () => {
   const [isAnnual, setIsAnnual] = useState(true);
 
   return (
@@ -233,7 +229,7 @@ const Pricing = ({ onNavigate }: PricingProps) => {
       </section>
 
       {/* --- Footer --- */}
-      <SectionFooter onNavigate={onNavigate} />
+      <SectionFooter />
     </div>
   );
 };

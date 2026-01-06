@@ -25,10 +25,6 @@ import {
   Rocket
 } from 'lucide-react';
 
-interface ProductProps {
-  onNavigate: (page: 'home' | 'privacy' | 'terms' | 'refund' | 'about' | 'pricing' | 'product') => void;
-}
-
 const features = [
   {
     title: "Infinite Variations",
@@ -119,6 +115,10 @@ const steps = [
         color: "#000000"
     }
 ]
+
+interface ProductProps {
+  onNavigate: (page: 'home' | 'privacy' | 'terms' | 'refund' | 'about' | 'pricing' | 'product' | 'solution') => void;
+}
 
 const Product = ({ onNavigate }: ProductProps) => {
   return (
